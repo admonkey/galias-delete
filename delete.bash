@@ -8,3 +8,11 @@ git_clean_merged_remote(){
 
 alias gcr='git_clean_merged_remote'
 __git_complete gcr _git_pull
+
+git_clean_merged_local(){
+	if [ -z $1 ]; then echo "error: branch required"; return; fi
+	git branch --merged | egrep -v "(^\*|$1)" | xargs git branch -d
+}
+
+alias gcl='git_clean_merged_local'
+__git_complete gcl _git_checkout
